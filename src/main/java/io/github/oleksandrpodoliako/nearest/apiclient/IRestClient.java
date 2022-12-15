@@ -1,8 +1,8 @@
-package com.opodoliako.nearest.apiclient;
+package io.github.oleksandrpodoliako.nearest.apiclient;
 
 
-import com.opodoliako.nearest.apiwrappers.RequestWrapper;
-import com.opodoliako.nearest.apiwrappers.ResponseWrapper;
+import io.github.oleksandrpodoliako.nearest.apiwrappers.RequestWrapper;
+import io.github.oleksandrpodoliako.nearest.apiwrappers.ResponseWrapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

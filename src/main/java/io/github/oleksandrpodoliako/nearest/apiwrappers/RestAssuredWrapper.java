@@ -1,4 +1,4 @@
-package com.opodoliako.nearest.apiwrappers;
+package io.github.oleksandrpodoliako.nearest.apiwrappers;
 
 import io.restassured.RestAssured;
 
