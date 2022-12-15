@@ -1,4 +1,4 @@
-package apiwrappers;
+package com.opodoliako.nearest.apiwrappers;
 
 import java.util.Map;
 
