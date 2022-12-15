@@ -26,7 +26,7 @@ public class Post {
 }
 ```
 
-* Create Client class and interface IRestClient
+* Create Client class and add interface IRestClient
 * implement two methods from interface IRestClient to return POJO model and POJO models array
 
 
