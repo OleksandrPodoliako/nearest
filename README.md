@@ -42,7 +42,7 @@ public class Post {
 
 
 ```
-public class TestClient implements IRestClient {
+public class PostClient implements IRestClient {
     @Override
     public <T> Type getClassType() {
         return Post.class;
@@ -64,7 +64,7 @@ public class Main {
 
         RequestWrapper<Post> requestWrapper = RequestWrapper.<Post>builder().build();
 
-        ResponseWrapper<Post> responseWrapper = new TestClient().getEntity(URL, requestWrapper);
+        ResponseWrapper<Post> responseWrapper = new PostClient().getEntity(URL, requestWrapper);
         
     }
 }
