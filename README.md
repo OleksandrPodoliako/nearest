@@ -69,3 +69,5 @@ public class Main {
     }
 }
 ```
+
+The full project-illustration can be found by [link](https://github.com/OleksandrPodoliako/nearest-example)
