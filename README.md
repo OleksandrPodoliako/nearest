@@ -15,7 +15,7 @@ NeaRest is a Rest Assure wrapper for writing Rest clients. Nearest reduces amoun
 <dependency>
     <groupId>io.github.oleksandrpodoliako</groupId>
     <artifactId>nearest</artifactId>
-    <version>1.0.1</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 * Create POJO model
@@ -37,23 +37,13 @@ public class Post {
 }
 ```
 
-* Create Client class and add interface IRestClient
-* Implement two methods from interface IRestClient to return POJO model and POJO models array
-
+* Create Client class and add interface IRestClient. Specify request's and response's body types in interface
 
 ```
-public class PostClient implements IRestClient {
-    @Override
-    public <T> Type getClassType() {
-        return Post.class;
-    }
-
-    @Override
-    public <T> Type getClassArrayType() {
-        return Post[].class;
-    }
+public class PostClient implements IRestClient<Post, Post> {
 }
 ```
+
 * Now you can instantiate Client class, which has all CRUD operations implemented
 
 ```
