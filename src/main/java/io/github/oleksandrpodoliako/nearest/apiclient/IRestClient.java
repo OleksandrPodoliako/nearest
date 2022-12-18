@@ -1,6 +1,7 @@
 package io.github.oleksandrpodoliako.nearest.apiclient;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.RequestWrapper;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.ResponseWrapper;
 import io.restassured.RestAssured;
@@ -9,13 +10,9 @@ import io.restassured.specification.RequestSpecification;
 
 import java.lang.reflect.Type;
 
-public interface IRestClient {
+public interface IRestClient<T, K> {
 
-    <T> Type getClassType();
-
-    <T> Type getClassArrayType();
-
-    default <T, K> ResponseWrapper<T[]> getEntityArray(String url, RequestWrapper<K> requestWrapper) {
+    default ResponseWrapper<T[]> getEntityArray(String url, RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T[]> responseWrapper = new ResponseWrapper<>();
 
         Response response = configureRequest(requestWrapper)
@@ -28,7 +25,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    default <T, K> ResponseWrapper<T> getEntity(String url, RequestWrapper<K> requestWrapper) {
+    default ResponseWrapper<T> getEntity(String url, RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
@@ -40,7 +37,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    default <T, K> ResponseWrapper<T> postEntity(Class<T> t, RequestWrapper<K> requestWrapper, String url) {
+    default ResponseWrapper<T> postEntity(Class<T> t, RequestWrapper<K> requestWrapper, String url) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
@@ -52,7 +49,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    default <T, K> ResponseWrapper<T> putEntity(String url, RequestWrapper<K> requestWrapper) {
+    default ResponseWrapper<T> putEntity(String url, RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
@@ -64,7 +61,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    default <T, K> ResponseWrapper<T> patchEntity(String url, RequestWrapper<K> requestWrapper) {
+    default ResponseWrapper<T> patchEntity(String url, RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
@@ -76,7 +73,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    default <T, K> ResponseWrapper<T> deleteEntity(String url, RequestWrapper<K> requestWrapper) {
+    default ResponseWrapper<T> deleteEntity(String url, RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
@@ -88,7 +85,7 @@ public interface IRestClient {
         return responseWrapper;
     }
 
-    private <T> RequestSpecification configureRequest(RequestWrapper<T> requestWrapper) {
+    private RequestSpecification configureRequest(RequestWrapper<K> requestWrapper) {
         RequestSpecification requestSpecification = RestAssured.given();
 
 
@@ -109,5 +106,15 @@ public interface IRestClient {
         }
 
         return requestSpecification;
+    }
+
+    private Type getClassType() {
+        return new TypeReference<T>() {
+        }.getType();
+    }
+
+    private Type getClassArrayType() {
+        return new TypeReference<T[]>() {
+        }.getType();
     }
 }
