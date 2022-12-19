@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface IRestClient<T, K> {
 
@@ -32,76 +34,51 @@ public interface IRestClient<T, K> {
     }
 
     private ResponseWrapper<T> getEntityArray(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
-
         Response response = configureRequest(requestWrapper)
                 .when()
                 .get(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassArrayType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassArrayType());
     }
 
     private ResponseWrapper<T> getEntity(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
                 .get(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassType());
     }
 
     private ResponseWrapper<T> postEntity(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
                 .post(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassType());
     }
 
     private ResponseWrapper<T> putEntity(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
                 .put(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassType());
     }
 
     private ResponseWrapper<T> patchEntity(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
                 .patch(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassType());
     }
 
     private ResponseWrapper<T> deleteEntity(RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
                 .delete(requestWrapper.getUrl());
 
-        responseWrapper.setBody(response.as(getClassType()));
-        responseWrapper.setResponseRaw(response);
-
-        return responseWrapper;
+        return fillResponseWrapper(response, getClassType());
     }
 
     private RequestSpecification configureRequest(RequestWrapper<K> requestWrapper) {
@@ -135,5 +112,16 @@ public interface IRestClient<T, K> {
     private Type getClassArrayType() {
         return new TypeReference<T[]>() {
         }.getType();
+    }
+
+    private ResponseWrapper<T> fillResponseWrapper(Response response, Type type) {
+        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
+        responseWrapper.setStatusLine(response.getStatusLine());
+        Map<String, String> headers = new HashMap<>();
+        response.headers().forEach(header -> headers.put(header.getName(), header.getValue()));
+        responseWrapper.setHeaders(headers);
+        responseWrapper.setBody(response.as(type));
+        responseWrapper.setResponseRaw(response);
+        return responseWrapper;
     }
 }

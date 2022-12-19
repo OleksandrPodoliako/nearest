@@ -2,7 +2,6 @@ package io.github.oleksandrpodoliako.nearest.apiwrappers;
 
 import io.restassured.response.Response;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ResponseWrapper<T> {
@@ -46,13 +45,5 @@ public class ResponseWrapper<T> {
 
     public void setResponseRaw(Response responseRaw) {
         this.responseRaw = responseRaw;
-        initResponseFields(responseRaw);
-    }
-
-    private void initResponseFields(Response responseRaw) {
-        setStatusLine(getResponseRaw().getStatusLine());
-        Map<String, String> headers = new HashMap<>();
-        responseRaw.headers().forEach(header -> headers.put(header.getName(), header.getValue()));
-        setHeaders(headers);
     }
 }
