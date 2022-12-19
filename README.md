@@ -48,7 +48,7 @@ public class PostClient implements IRestClient<Post, Post> {
 
 ```
 public class Main {
-    private static final String URL = "https://jsonplaceholder.typicode.com/posts/1";
+    private static final String URL = "https://jsonplaceholder.typicode.com/posts/";
 
     public static void main(String[] args) {
 
