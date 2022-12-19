@@ -12,12 +12,31 @@ import java.lang.reflect.Type;
 
 public interface IRestClient<T, K> {
 
-    default ResponseWrapper<T[]> getEntityArray(String url, RequestWrapper<K> requestWrapper) {
-        ResponseWrapper<T[]> responseWrapper = new ResponseWrapper<>();
+    default ResponseWrapper<T> send(RequestWrapper<K> requestWrapper) {
+        switch (requestWrapper.getApiMethod()) {
+            case GET:
+                return getEntity(requestWrapper);
+            case GET_ARRAY:
+                return getEntityArray(requestWrapper);
+            case POST:
+                return postEntity(requestWrapper);
+            case PUT:
+                return putEntity(requestWrapper);
+            case PATCH:
+                return patchEntity(requestWrapper);
+            case DELETE:
+                return deleteEntity(requestWrapper);
+            default:
+                throw new RuntimeException(String.format("[%s] is not implemented", requestWrapper.getApiMethod()));
+        }
+    }
+
+    private ResponseWrapper<T> getEntityArray(RequestWrapper<K> requestWrapper) {
+        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
 
         Response response = configureRequest(requestWrapper)
                 .when()
-                .get(url);
+                .get(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassArrayType()));
         responseWrapper.setResponseRaw(response);
@@ -25,11 +44,11 @@ public interface IRestClient<T, K> {
         return responseWrapper;
     }
 
-    default ResponseWrapper<T> getEntity(String url, RequestWrapper<K> requestWrapper) {
+    private ResponseWrapper<T> getEntity(RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
-                .get(url);
+                .get(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassType()));
         responseWrapper.setResponseRaw(response);
@@ -37,11 +56,11 @@ public interface IRestClient<T, K> {
         return responseWrapper;
     }
 
-    default ResponseWrapper<T> postEntity(Class<T> t, RequestWrapper<K> requestWrapper, String url) {
+    private ResponseWrapper<T> postEntity(RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
-                .post(url);
+                .post(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassType()));
         responseWrapper.setResponseRaw(response);
@@ -49,11 +68,11 @@ public interface IRestClient<T, K> {
         return responseWrapper;
     }
 
-    default ResponseWrapper<T> putEntity(String url, RequestWrapper<K> requestWrapper) {
+    private ResponseWrapper<T> putEntity(RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
-                .put(url);
+                .put(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassType()));
         responseWrapper.setResponseRaw(response);
@@ -61,11 +80,11 @@ public interface IRestClient<T, K> {
         return responseWrapper;
     }
 
-    default ResponseWrapper<T> patchEntity(String url, RequestWrapper<K> requestWrapper) {
+    private ResponseWrapper<T> patchEntity(RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
-                .patch(url);
+                .patch(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassType()));
         responseWrapper.setResponseRaw(response);
@@ -73,11 +92,11 @@ public interface IRestClient<T, K> {
         return responseWrapper;
     }
 
-    default ResponseWrapper<T> deleteEntity(String url, RequestWrapper<K> requestWrapper) {
+    private ResponseWrapper<T> deleteEntity(RequestWrapper<K> requestWrapper) {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
         Response response = configureRequest(requestWrapper)
                 .when()
-                .delete(url);
+                .delete(requestWrapper.getUrl());
 
         responseWrapper.setBody(response.as(getClassType()));
         responseWrapper.setResponseRaw(response);
