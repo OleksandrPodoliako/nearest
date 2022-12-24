@@ -71,5 +71,5 @@ NearestConfig.setRequestLogging(RequestLoggingLevel.ALL);
 NearestConfig.setResponseLogging(ResponseLoggingLevel.ALL);
 ```
 
-
+## Links
 The full project-illustration can be found by [link](https://github.com/OleksandrPodoliako/nearest-example)
