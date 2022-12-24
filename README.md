@@ -63,4 +63,13 @@ public class Main {
 }
 ```
 
+## How to manage logging?
+
+* Set request and response logging level(By default NONE)
+```
+NearestConfig.setRequestLogging(RequestLoggingLevel.ALL);
+NearestConfig.setResponseLogging(ResponseLoggingLevel.ALL);
+```
+
+
 The full project-illustration can be found by [link](https://github.com/OleksandrPodoliako/nearest-example)
