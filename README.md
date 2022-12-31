@@ -7,8 +7,12 @@
 ![](https://img.shields.io/badge/Rest--Assured-5.2.0-blue)
 ![](https://img.shields.io/badge/Jackson-2.14.0-blue)
 
+***
+
 ## What is NeaRest?
 NeaRest is a Rest Assure wrapper for writing Rest clients. Nearest reduces amount of code, which needed to be written for REST clients,  by using generics. NeaRest inherent HTTP two level structure. On first level Nearest has RequestWrapper and ResponseWrapper. On second level RequestWrapper has headers and body. ResponseWrapper has body and raw response. Also, NeaRest has RestAssuredWrapper, which allow to do more specific actions with raw Rest Assured. Also, NeaRest has iRestClient, which contains already implemented CRUD operations.
+
+***
 
 ## How to use?
 * Add NeaRest to the project
@@ -64,13 +68,36 @@ public class Main {
 }
 ```
 
-## How to manage logging?
+***
+
+## FAQ
+
+### How to manage logging?
 
 * Set request and response logging level(By default NONE)
+
 ```
 NearestConfig.setRequestLogging(RequestLoggingLevel.ALL);
 NearestConfig.setResponseLogging(ResponseLoggingLevel.ALL);
 ```
+
+### How to switch off mapping to objects?
+
+* Set mapping strategy to NOT_TO_MAP
+
+```
+NearestConfig.setMappingStrategy(MappingStrategy.NOT_TO_MAP);
+```
+
+### How to get plain Rest Assured functionality?
+
+* RestAssuredWrapper gives access to plain Rest Assured functionality
+
+```
+RestAssuredWrapper.given().when().then();
+```
+
+***
 
 ## Links
 The full project-illustration can be found by [link](https://github.com/OleksandrPodoliako/nearest-example)
