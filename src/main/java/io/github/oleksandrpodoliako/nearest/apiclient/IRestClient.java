@@ -4,6 +4,7 @@ package io.github.oleksandrpodoliako.nearest.apiclient;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.RequestWrapper;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.ResponseWrapper;
+import io.github.oleksandrpodoliako.nearest.enums.MappingStrategy;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,8 +13,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.github.oleksandrpodoliako.nearest.apiclient.NearestConfig.getRequestLogging;
-import static io.github.oleksandrpodoliako.nearest.apiclient.NearestConfig.getResponseLogging;
+import static io.github.oleksandrpodoliako.nearest.apiclient.NearestConfig.*;
 
 public interface IRestClient<T, K> {
 
@@ -123,10 +123,15 @@ public interface IRestClient<T, K> {
         configureResponseLogging(response);
 
         responseWrapper.setStatusLine(response.getStatusLine());
+
         Map<String, String> headers = new HashMap<>();
         response.headers().forEach(header -> headers.put(header.getName(), header.getValue()));
         responseWrapper.setHeaders(headers);
-        responseWrapper.setBody(response.as(type));
+
+        if (getMappingStrategy().equals(MappingStrategy.TO_MAP)) {
+            responseWrapper.setBody(response.as(type));
+        }
+
         responseWrapper.setResponseRaw(response);
 
         return responseWrapper;

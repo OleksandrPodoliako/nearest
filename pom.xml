@@ -6,13 +6,17 @@
 
     <groupId>io.github.oleksandrpodoliako</groupId>
     <artifactId>nearest</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <rest-assured.version>5.2.0</rest-assured.version>
         <jackson.version>2.14.0</jackson.version>
+        <junit.version>4.13.2</junit.version>
+        <wiremock.version>2.35.0</wiremock.version>
+        <javafaker.version>1.0.2</javafaker.version>
+        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
     </properties>
 
     <dependencies>
@@ -27,6 +31,44 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>${wiremock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>${maven.surefire.plugin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
