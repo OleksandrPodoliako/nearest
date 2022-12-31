@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Tests execution on main branch update
+name: Tests execution
 
 on:
   push:
