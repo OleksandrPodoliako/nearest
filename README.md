@@ -1,5 +1,6 @@
 # NeaRest is a Rest Assured wrapper for test automation activities
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrpodoliako/nearest.svg)](https://search.maven.org/artifact/io.github.oleksandrpodoliako/nearest)
+[![Tests execution](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRunOnMainChangeAction.yml/badge.svg)](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRunOnMainChangeAction.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrpodoliako/nearest.svg)](https://search.maven.org/artifact/io.github.oleksandrpodoliako/nearest)\
 [![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/OleksandrPodoliako/nearest/blob/main/LICENSE)
 ![Free](https://img.shields.io/badge/free-open--source-green.svg) \
 ![](https://img.shields.io/badge/Java-11-blue)
