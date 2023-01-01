@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class RequestWrapper<T> {
 
-
     private APIMethod apiMethod;
     private String url;
     private Map<String, String> headers;
