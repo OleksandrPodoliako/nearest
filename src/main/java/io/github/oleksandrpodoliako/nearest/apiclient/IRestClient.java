@@ -6,13 +6,12 @@ import io.github.oleksandrpodoliako.nearest.apiwrappers.RequestWrapper;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.ResponseWrapper;
 import io.github.oleksandrpodoliako.nearest.enums.MappingStrategy;
 import io.github.oleksandrpodoliako.nearest.utils.Converter;
+import io.github.oleksandrpodoliako.nearest.utils.FilesUtil;
 import io.github.oleksandrpodoliako.nearest.utils.NearestConfig;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,13 +24,9 @@ public interface IRestClient<T, K> {
 
         switch (NearestConfig.getExportStrategy()) {
             case TO_FILE:
-                try {
-                    PrintWriter out = new PrintWriter(NearestConfig.getExportFileName());
-                    out.println("curl:");
-                    out.println(Converter.toCurl(requestWrapper));
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+                FilesUtil fileWriter = new FilesUtil();
+                fileWriter.writeToFile(NearestConfig.getExportFileName(), Converter.toCurl(requestWrapper));
+                fileWriter.writeToFile(NearestConfig.getExportFileName(), "");
                 break;
             case TO_CONSOLE:
                 System.out.println("curl:");
