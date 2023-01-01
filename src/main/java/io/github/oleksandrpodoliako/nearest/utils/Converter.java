@@ -75,9 +75,9 @@ public class Converter {
 
     public static <T> RequestWrapper<T> toRequestWrapper(String curl, Class<T> t) {
         String methodRegEx = "(?<=--request )(.*)(?= ')";
-        String URLRegEx = "(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])";
-        String queryParameterRegEx = "[a-zA-Z\\_\\-]+=[a-zA-Z\\_\\-]+";
-        String headerRegEx = "[a-zA-Z\\_\\-]+: [a-zA-Z\\_\\-]+";
+        String URLRegEx = "([\\w+]+\\:\\/\\/)?([\\w\\d-]+\\.)*[\\w-]+[\\.\\:]\\w+([\\/\\?\\=\\&\\#\\.]?[\\w-]+)*\\/?";
+        String queryParameterRegEx = "\\?(.*)'";
+        String headerRegEx = "--header '(.*)'";
         String bodyRegEx = "(?<=--data-raw )(.*)";
 
         RequestWrapper<T> requestWrapper = RequestWrapper.<T>builder().build();
@@ -124,7 +124,7 @@ public class Converter {
         matcher = pattern.matcher(curl);
         Map<String, String> headers = new HashMap<>();
         while (matcher.find()) {
-            String header = matcher.group();
+            String header = matcher.group(1);
             headers.put(header.split(": ")[0], header.split(": ")[1]);
         }
         requestWrapper.setHeaders(headers);
@@ -132,9 +132,12 @@ public class Converter {
         pattern = Pattern.compile(queryParameterRegEx);
         matcher = pattern.matcher(curl);
         Map<String, String> queryParameters = new HashMap<>();
-        while (matcher.find()) {
-            String queryParameter = matcher.group();
-            queryParameters.put(queryParameter.split("=")[0], queryParameter.split("=")[1]);
+        if (matcher.find()) {
+            String[] queryParametersStringArray = matcher.group(1).split("&");
+
+            for (String queryParameter : queryParametersStringArray) {
+                queryParameters.put(queryParameter.split("=")[0], queryParameter.split("=")[1]);
+            }
         }
         requestWrapper.setQueryParameters(queryParameters);
 
