@@ -1,4 +1,4 @@
-package rest.models;
+package io.github.oleksandrpodoliako.nearest.rest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

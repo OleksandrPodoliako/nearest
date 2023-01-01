@@ -52,7 +52,7 @@ public class PostClient implements IRestClient<Post, Post> {
 * Now you can instantiate Client class, which has all CRUD operations implemented
 
 ```
-public class Main {
+public class rest.tests.Main {
     private static final String URL = "https://jsonplaceholder.typicode.com/posts/";
 
     public static void main(String[] args) {

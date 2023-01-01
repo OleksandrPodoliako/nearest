@@ -1,19 +1,19 @@
-package rest.tests;
+package io.github.oleksandrpodoliako.nearest.rest.tests;
 
 import com.github.tomakehurst.wiremock.common.Json;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import io.github.oleksandrpodoliako.nearest.apiwrappers.RequestWrapper;
 import io.github.oleksandrpodoliako.nearest.enums.APIMethod;
+import io.github.oleksandrpodoliako.nearest.rest.clients.PostClient;
+import io.github.oleksandrpodoliako.nearest.rest.datageneration.DataProvider;
+import io.github.oleksandrpodoliako.nearest.rest.models.Post;
 import org.junit.Rule;
 import org.junit.Test;
-import rest.clients.PostClient;
-import rest.models.Post;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static rest.datageneration.DataProvider.getPost;
 
 public class RestTests {
 
@@ -36,7 +36,7 @@ public class RestTests {
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()
                         .withHeader(HEADER_KEY, HEADER_VALUE)
-                        .withBody(Json.write(getPost()))));
+                        .withBody(Json.write(DataProvider.getPost()))));
 
         RequestWrapper<Post> requestWrapper = RequestWrapper.<Post>builder()
                 .url(BASE_URL + ":" + PORT + GET_URL)
@@ -60,7 +60,7 @@ public class RestTests {
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()
                         .withHeader(HEADER_KEY, HEADER_VALUE)
-                        .withBody(Json.write(new Post[]{getPost()}))));
+                        .withBody(Json.write(new Post[]{DataProvider.getPost()}))));
 
         RequestWrapper<Post> requestWrapper = RequestWrapper.<Post>builder()
                 .url(BASE_URL + ":" + PORT + ENDPOINT_URL)
@@ -80,7 +80,7 @@ public class RestTests {
 
     @Test
     public void postTest() {
-        Post post = getPost();
+        Post post = DataProvider.getPost();
         givenThat(post(ENDPOINT_URL)
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()
@@ -106,7 +106,7 @@ public class RestTests {
 
     @Test
     public void putTest() {
-        Post post = getPost();
+        Post post = DataProvider.getPost();
         givenThat(put(ENDPOINT_URL)
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()
@@ -132,7 +132,7 @@ public class RestTests {
 
     @Test
     public void patchTest() {
-        Post post = getPost();
+        Post post = DataProvider.getPost();
         givenThat(patch(urlEqualTo(ENDPOINT_URL))
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()
@@ -158,7 +158,7 @@ public class RestTests {
 
     @Test
     public void deleteTest() {
-        Post post = getPost();
+        Post post = DataProvider.getPost();
         givenThat(delete(ENDPOINT_URL)
                 .withHeader(HEADER_KEY, containing(HEADER_VALUE))
                 .willReturn(ok()

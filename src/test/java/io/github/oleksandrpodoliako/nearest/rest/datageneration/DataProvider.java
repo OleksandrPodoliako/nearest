@@ -1,7 +1,7 @@
-package rest.datageneration;
+package io.github.oleksandrpodoliako.nearest.rest.datageneration;
 
 import com.github.javafaker.Faker;
-import rest.models.Post;
+import io.github.oleksandrpodoliako.nearest.rest.models.Post;
 
 public class DataProvider {
 
