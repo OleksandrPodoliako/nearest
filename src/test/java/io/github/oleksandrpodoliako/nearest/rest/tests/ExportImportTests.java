@@ -42,7 +42,7 @@ public class ExportImportTests {
                         .withHeader(HEADER_KEY, HEADER_VALUE)
                         .withBody(Json.write(DataProvider.getPost()))));
 
-        RequestWrapper<Post> requestWrapper = Converter.toRequestWrapper(curl, Post.class);
+        RequestWrapper<Post> requestWrapper = new Converter().toRequestWrapper(curl, Post.class);
 
         new PostClient().send(requestWrapper);
 
@@ -64,7 +64,7 @@ public class ExportImportTests {
                 .headers(HEADERS)
                 .build();
 
-        String curlActual = Converter.toCurl(requestWrapper);
+        String curlActual = new Converter().toCurl(requestWrapper);
 
         assertEquals("The converted curl should be correct", curlExpected, curlActual);
     }

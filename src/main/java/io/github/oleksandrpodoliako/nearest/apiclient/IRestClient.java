@@ -25,12 +25,12 @@ public interface IRestClient<T, K> {
         switch (NearestConfig.getExportStrategy()) {
             case TO_FILE:
                 FilesUtil fileWriter = new FilesUtil();
-                fileWriter.writeToFile(NearestConfig.getExportFileName(), Converter.toCurl(requestWrapper));
+                fileWriter.writeToFile(NearestConfig.getExportFileName(), new Converter().toCurl(requestWrapper));
                 fileWriter.writeToFile(NearestConfig.getExportFileName(), "");
                 break;
             case TO_CONSOLE:
                 System.out.println("curl:");
-                System.out.println(Converter.toCurl(requestWrapper));
+                System.out.println(new Converter().toCurl(requestWrapper));
                 break;
             default: // do nothing;
                 break;
