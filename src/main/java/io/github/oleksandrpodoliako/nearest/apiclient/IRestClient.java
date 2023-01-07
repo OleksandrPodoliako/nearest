@@ -159,11 +159,15 @@ public interface IRestClient<T, K> {
         switch (getRequestLogging()) {
             case ALL:
                 requestSpecification.log().all();
+                break;
             case PARAMETERS:
                 requestSpecification.log().parameters();
+                break;
             case METHODS:
                 requestSpecification.log().method();
-            default:
+                break;
+            default: // do nothing;
+                break;
         }
     }
 
@@ -171,11 +175,15 @@ public interface IRestClient<T, K> {
         switch (getResponseLogging()) {
             case ALL:
                 response.then().log().all();
+                break;
             case BODY:
                 response.then().log().body();
+                break;
             case STATUS:
                 response.then().log().body();
-            default:
+                break;
+            default: // do nothing;
+                break;
         }
     }
 }
