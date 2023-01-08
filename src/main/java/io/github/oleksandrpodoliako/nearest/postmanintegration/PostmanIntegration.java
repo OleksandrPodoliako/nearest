@@ -34,13 +34,14 @@ public class PostmanIntegration {
         Item item = items.stream().filter(it -> it.getName().equals(requestName)).findFirst().get();
 
         try {
-            T body;
-            if (t == String.class) {
-                body = (T) item.getRequest().getBody().getRaw();
-            } else {
-                body = new ObjectMapper().readValue(item.getRequest().getBody().getRaw(), t);
+            T body = null;
+            if (item.getRequest().getBody() != null) {
+                if (t == String.class) {
+                    body = (T) item.getRequest().getBody().getRaw();
+                } else {
+                    body = new ObjectMapper().readValue(item.getRequest().getBody().getRaw(), t);
+                }
             }
-
 
             return RequestWrapper.<T>builder()
                     .url(item.getRequest().getUrl().getUrl())
