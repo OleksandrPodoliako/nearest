@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "67ea7213-5bf1-4d3a-888a-fbf53d4f9648",
+		"name": "NearestImportFromPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3602596"
+	},
+	"item": [
+		{
+			"name": "folder1level",
+			"item": [
+				{
+					"name": "folder2level",
+					"item": [
+						{
+							"name": "request1",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json; charset=UTF-8"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:44444/posts/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "44444",
+									"path": [
+										"posts",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "request2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json; charset=UTF-8"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44444/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44444",
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json; charset=UTF-8"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44444/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44444",
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
