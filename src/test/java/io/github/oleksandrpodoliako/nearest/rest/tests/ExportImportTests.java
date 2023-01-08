@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class ExportImportTests {
 
     private static final String POSTMAN_COLLECTION_PATH = System.getProperty("os.name")
-            .toLowerCase().contains("windows") ? "src/test/resources/" : "src\\test\\resources\\";
+            .toLowerCase().contains("windows") ? "/src/test/resources/" : "src\\test\\resources\\";
     private final static String POSTMAN_COLLECTION_FILE_NAME = "NearestImportFromPostman.postman_collection.json";
     private final static String BASE_URL = "http://localhost";
     private final static String GET_URL = "/posts/1";
