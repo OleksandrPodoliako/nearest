@@ -1,6 +1,6 @@
 <div style="text-align:center"><img src="media/NearestLogo.png" /></div>
 
-### NeaRest is a Rest Assured wrapper for test automation activities
+### Nearest is a free and open source java library for REST API interactions
 [![Tests execution](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRun.yml/badge.svg)](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRun.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrpodoliako/nearest.svg)](https://search.maven.org/artifact/io.github.oleksandrpodoliako/nearest)\
 [![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/OleksandrPodoliako/nearest/blob/main/LICENSE)
