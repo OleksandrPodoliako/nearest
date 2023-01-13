@@ -1,4 +1,6 @@
-### NeaRest is a Rest Assured wrapper for test automation activities
+<div style="text-align:center"><img src="media/NearestLogo.png" /></div>
+
+### Nearest is a free and open source java library for REST API interactions
 [![Tests execution](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRun.yml/badge.svg)](https://github.com/OleksandrPodoliako/nearest/actions/workflows/testsRun.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.oleksandrpodoliako/nearest.svg)](https://search.maven.org/artifact/io.github.oleksandrpodoliako/nearest)\
 [![MIT License](http://img.shields.io/badge/license-MIT-green.svg)](https://github.com/OleksandrPodoliako/nearest/blob/main/LICENSE)
@@ -16,6 +18,14 @@ Nearest inherent HTTP two level structure. On first level Nearest has RequestWra
 ***
 
 ### How to use?
+
+<details> 
+  <summary>Please click to watch gif</summary>
+
+![Gif](media/NearestHowToUse.gif)
+
+</details>
+
 * Add NeaRest to the project
 ```
 <dependency>
@@ -100,6 +110,13 @@ RestAssuredWrapper.given().when().then();
 
 #### How to switch on export all requests to file/console?
 
+<details> 
+  <summary>Please click to watch gif</summary>
+
+![Gif](media/NearestHowToExportToFileAll.gif)
+
+</details>
+
 * Set export strategy to ExportStrategy.TO_FILE(By default NOT_TO_EXPORT). All requests will be converted to curl and stored to targets/export.txt. File can be changed with NearestConfig.setExportFileName() method
 
 ```
@@ -115,6 +132,13 @@ Converter.toCurl(requestWrapper);
 ```
 
 #### How to convert curl to requestWrapper?
+
+<details> 
+  <summary>Please click to watch gif</summary>
+
+![Gif](media/NearestHowToImportCurl.gif)
+
+</details>
 
 * Use util method toRequestWrapper from Converter class
 
@@ -134,6 +158,13 @@ curl --request GET 'http://localhost:44444/posts/1' \
 
 #### How to import requests from Postman to Nearest?
 
+<details> 
+  <summary>Please click to watch gif</summary>
+
+![Gif](media/NearestHowToImportFromPostman.gif)
+
+</details>
+
 * Export collection from Postman
 * Instantiate PostmanIntegration class with path to exported Postman collection json
 
@@ -146,6 +177,7 @@ PostmanIntegration postmanIntegration = new PostmanIntegration(exportedPostmanCo
 ```
 RequestWrapper<Post> requestWrapper = postmanIntegration.getRequestWrapper("request1", Post.class, "folder1level", "folder2level");
 ```
+
 ***
 
 ### Links
