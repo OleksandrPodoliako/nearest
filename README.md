@@ -8,7 +8,7 @@
 ![](https://img.shields.io/badge/Java-11-blue)
 ![](https://img.shields.io/badge/Rest--Assured-5.2.0-blue)
 ![](https://img.shields.io/badge/Jackson-2.14.0-blue) \
-[![Contact](https://img.shields.io/badge/contact-site-green)](https://opodoliako.com/contact/)
+[![Contact](https://img.shields.io/badge/contact-site-green)](https://www.linkedin.com/in/oleksandr-podoliako/)
 
 ***
 
